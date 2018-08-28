@@ -1,0 +1,11 @@
+.side-content form input {
+    width: 100%;
+    padding: 10px 5px;
+}
+
+.side-content form button:hover {
+    border: 1px solid #000;
+    color: white;
+    background-color: #5858FA;
+    cursor: pointer;
+}

@@ -1,0 +1,47 @@
+#side {
+    height: 100%;
+    background-color: #444;
+    overflow: hidden;
+    transition: max-width 1s ease-in-out, min-width 1s ease-in-out;
+}
+
+#side.hide {
+    max-width: 0;
+    min-width: 0;
+    pointer-events: none;
+}
+
+#side.show {
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.side-header {
+    background-color: #333;
+    padding: 14px;
+    text-align: center;
+}
+
+.side-header h3 {
+    color: #fff;
+}
+
+.side-content {
+    padding: 10px 0 10px;
+}
+
+.side-content ul {
+    list-style-type: none;
+}
+
+.side-content ul li {
+    padding: 16px 0 16px 5px;
+    color: #ccc;
+}
+
+.side-content ul li:hover {
+    background-color: #999;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}

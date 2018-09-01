@@ -29,23 +29,3 @@
 .side-content {
     padding: 10px 0 10px;
 }
-
-.side-content ul {
-    list-style-type: none;
-}
-
-.side-content ul li {
-    padding: 16px 0 16px 5px;
-    color: #fff;
-}
-
-.side-content ul li:hover {
-    background-color: #999;
-    color: #fff;
-    cursor: pointer;
-}
-
-.active {
-    background-color: #999;
-    border-right: 5px solid red;
-}

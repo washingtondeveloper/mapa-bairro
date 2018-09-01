@@ -5,14 +5,14 @@ import MapList from '../mapList/MapList';
 
 import './MapSide.css';
 
-export default props => (
-    <div id="side" className={props.showSide ? 'show' : 'hide'} >
+export default ({ showSide, title, items, onMarkerClick, onUpdateQuery }) => (
+    <div id="side" className={showSide ? 'show' : 'hide'} >
         <div className="side-header">
-            <h3>{props.title}</h3>
+            <h3>{title}</h3>
         </div>
         <div className="side-content">
-            <MapForm />
-            <MapList items={props.items} onMarkerClick={props.onMarkerClick}/>
+            <MapForm updateQuery={onUpdateQuery}/>
+            <MapList items={items} onMarkerClick={onMarkerClick}/>
         </div>
     </div>
 );

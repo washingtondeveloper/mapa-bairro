@@ -1,8 +1,8 @@
 import React from 'react';
 import './MapForm.css';
 
-export default props => (
-    <form action="">
-        <input type="text" placeholder="Filtro..." />
+export default ({ updateQuery }) => (
+    <form>
+        <input type="text" placeholder="Filtro..." onChange={event => updateQuery(event.target.value)} />
     </form>
 );

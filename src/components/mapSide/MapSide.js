@@ -12,7 +12,7 @@ export default props => (
         </div>
         <div className="side-content">
             <MapForm />
-            <MapList />
+            <MapList items={props.items} onMarkerClick={props.onMarkerClick}/>
         </div>
     </div>
 );

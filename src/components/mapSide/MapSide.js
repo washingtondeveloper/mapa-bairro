@@ -4,7 +4,10 @@ import MapForm from '../mapForm/MapForm';
 import MapList from '../mapList/MapList';
 
 import './MapSide.css';
-
+/**
+ * @description Barra lateral
+ * @method MapSide
+ */
 export default ({ showSide, title, items, onMarkerClick, onUpdateQuery }) => (
     <div id="side" className={showSide ? 'show' : 'hide'} >
         <div className="side-header">

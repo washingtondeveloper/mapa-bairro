@@ -3,9 +3,12 @@ import { Marker, InfoWindow } from 'react-google-maps';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 
-import MyMap from './containers/map/MyMap';
+import MyMap from './components/map/MyMap';
 import MapBtnMeu from './components/mapBtnMenu/MapBtnMeu';
 import MapSide from './components/mapSide/MapSide';
+
+import * as apiMakers from './service/ApiMarkers';
+import { apiGoogle } from './config/config';
 
 import './App.css'
 
@@ -16,32 +19,19 @@ import './App.css'
  */
 export default class App extends React.Component {
 
-    constructor(props) {
-        super(props);
+        urlGoogle = apiGoogle;
 
-        this.urlGoogle = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=&libraries=geometry,drawing,places";
-
-        this.state = {
+        state = {
             showSide: false,
             query: '',
-            markers: [
-                { id: 1, title: 'Lava Radio', description: 'R. Maria videira da Costa', lat: -23.526702, lng: -46.383464, show: false },
-                { id: 2, title: 'Praca para exercicio, ', description: 'com aparelhos ar livre', lat: -23.527696, lng: -46.384718, show: false },
-                { id: 3, title: 'Campo de futebol', description: ' Parque dos Sonhos', lat: -23.526344, lng: -46.385463, show: false },
-                { id: 4, title: 'Estacionamento organizado * ', description: 'Esquina Antônio Lourenco dos Santos', lat: -23.528139, lng: -46.382737, show: false },
-                { id: 5, title: 'Mercado e Padaria J&F ', description: 'R. Maria videira da Costa', lat: -23.526874, lng: -46.383761, show: false },
-            ]
+            markers: []
         }
-
-        this.handleMarkerClick = this.handleMarkerClick.bind(this);
-        this.updateQuery = this.updateQuery.bind(this);
-    }
 
     /**
      * @description Responsavel adminitrar o click no marker, show ou hide a descrição
      * @param {Integer} id
      */
-    handleMarkerClick(id) {
+    handleMarkerClick = id => {
         this.setState(state => {
             return {
                 ...state,
@@ -56,11 +46,20 @@ export default class App extends React.Component {
         });
     }
 
+    componentDidMount() {
+        apiMakers.getAll()
+            .then(markers => this.setState({ markers }))
+            .catch(error => {
+                alert('Tivemos um problema ao carregar as Marcações :-(');
+                console.error(error);
+            });
+    }
+
     /**
      * @description Responsavel em mudar a variavel Query do estado
      * @param {String} query 
      */
-    updateQuery(query) {
+    updateQuery = query => {
         this.setState({ query: query.trim() });
     }
 
@@ -68,7 +67,7 @@ export default class App extends React.Component {
      * @method handleToogle
      * @description Responsavel em administrar a visualização do aside
      */
-    handleToogle() {
+    handleToogle = () => {
         this.setState({ showSide: !this.state.showSide });
     }
 
@@ -76,7 +75,7 @@ export default class App extends React.Component {
      * @method Filter
      * @description Responsavel em fazer o filtro dos markers
      */
-    filter() {
+    filter = () => {
         let showingMarkers;
 
         if (this.state.query) {

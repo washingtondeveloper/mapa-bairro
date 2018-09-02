@@ -1,0 +1,4 @@
+{
+    "apiGoogle":"https://maps.googleapis.com/maps/api/js?v=3.exp&key=&libraries=geometry,drawing,places",
+    "apiMarkers":"http://my-json-server.typicode.com/washingtondeveloper/api-mapa"
+}

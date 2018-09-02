@@ -17,4 +17,5 @@
 - [escape-string-regexp](https://www.npmjs.com/package/escape-string-regexp) = Para trabalhar com Regex, Foi utilizado na parte de filtro.
 - [react-google-maps](https://tomchentw.github.io/react-google-maps/)    = Uma das apis principais, manipulação do Map veja mais [ReactGoogleMaps](https://tomchentw.github.io/react-google-maps/)
 - [sort-by](https://www.npmjs.com/package/sort-by)              = Foi utlizado para Organizar os nomes na barra de pesquisa.
+- [JsonPlaceholder](https://jsonplaceholder.typicode.com/) = Utilizei um modulo para criação de uma api Customizada [my-json-server](https://my-json-server.typicode.com/) onde posso fazer minha configuração :-).
 

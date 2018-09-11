@@ -19,8 +19,20 @@ body {
     display: flex;
 }
 
+#error {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    text-align: center;
+    font-size: 250px;
+    margin: 0 auto;
+    color: brown;
+    text-transform: uppercase;
+}
+
 :focus {
     outline: 5px dotted red;
+    font-size: 19px;
 }
 
 ::placeholder {

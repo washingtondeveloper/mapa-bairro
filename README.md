@@ -19,3 +19,9 @@
 - [sort-by](https://www.npmjs.com/package/sort-by)              = Foi utlizado para Organizar os nomes na barra de pesquisa.
 - [JsonPlaceholder](https://jsonplaceholder.typicode.com/) = Utilizei um modulo para criação de uma api Customizada [my-json-server](https://my-json-server.typicode.com/) onde posso fazer minha configuração :-).
 
+## Aplicação Offline
+
+- Para o modo de offline funcione, é necessario fazer o build do app.
+- Entrando na pasta ```cd mapa-bairro``` e depois ```npm run build``` será gerado uma pasta chamada ```build```
+- E pronto, agora é so colocar essa pasta no seu servidor, e referenciar seu index.html e pronto, ou colocar o conteudo da pasta no seu servidor e automaticamente o servidor ira chamar seu index.html :-).
+

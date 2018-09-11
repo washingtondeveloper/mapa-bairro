@@ -6,6 +6,7 @@ import sortBy from 'sort-by';
 import MyMap from './components/map/MyMap';
 import MapBtnMeu from './components/mapBtnMenu/MapBtnMeu';
 import MapSide from './components/mapSide/MapSide';
+import Icon from './img/fechado.svg';
 
 import * as apiMakers from './service/ApiMarkers';
 import { apiGoogle } from './config/config';
@@ -19,13 +20,14 @@ import './App.css'
  */
 export default class App extends React.Component {
 
-        urlGoogle = apiGoogle;
+    urlGoogle = apiGoogle;
 
-        state = {
-            showSide: false,
-            query: '',
-            markers: []
-        }
+    state = {
+        showSide: false,
+        query: '',
+        markers: [],
+        mapError: false
+    }
 
     /**
      * @description Responsavel adminitrar o click no marker, show ou hide a descrição
@@ -46,13 +48,19 @@ export default class App extends React.Component {
         });
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
+
+        window.gm_authFailure = () => {
+            this.setState({ mapError: true });
+        }
+
         apiMakers.getAll()
             .then(markers => this.setState({ markers }))
             .catch(error => {
                 alert('Tivemos um problema ao carregar as Marcações :-(');
                 console.error(error);
             });
+
     }
 
     /**
@@ -95,6 +103,7 @@ export default class App extends React.Component {
         showingMarkers.sort(sortBy('title'));
 
         return (
+
             <div id="mapContainer">
 
                 <MapSide title="Localizações"
@@ -106,28 +115,35 @@ export default class App extends React.Component {
                 <section style={{ height: `100%`, width: `100%` }}>
                     <MapBtnMeu meuClick={() => this.handleToogle()} showSide={this.state.showSide} />
 
-                    <MyMap
-                        googleMapURL={this.urlGoogle}
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `100%`, width: `100%` }} />}
-                        mapElement={<div style={{ height: `100%` }} />} >
+                    {!this.state.mapError &&
+                        <MyMap
+                            googleMapURL={this.urlGoogle}
+                            loadingElement={<div style={{ height: `100%` }} />}
+                            containerElement={<div style={{ height: `100%`, width: `100%` }} />}
+                            mapElement={<div style={{ height: `100%` }} />} >
 
-                        {showingMarkers.map((m, i) => {
-                            const { id, show, lat, lng, title, description } = m
-                            return (
-                                <Marker key={i} position={{ lat, lng }} onClick={() => this.handleMarkerClick(id)}>
-                                    {show && <InfoWindow onCloseClick={() => this.handleMarkerClick(id)}>
-                                        <div>
-                                            <h1>{title}</h1>
-                                            <p>{description}</p>
-                                        </div>
-                                    </InfoWindow>}
-                                </Marker>
-                            )
-                        })}
-                    </MyMap>
+                            {showingMarkers.map((m, i) => {
+                                const { id, show, lat, lng, title, description } = m
+                                return (
+                                    <Marker key={i} position={{ lat, lng }} icon={show ? { url: Icon } : null} onClick={() => this.handleMarkerClick(id)}>
+                                        {show && <InfoWindow onCloseClick={() => this.handleMarkerClick(id)}>
+                                            <div>
+                                                <h1>{title}</h1>
+                                                <p>{description}</p>
+                                            </div>
+                                        </InfoWindow>}
+                                    </Marker>
+                                )
+                            })}
+                        </MyMap>
+                    }
+                    {this.state.mapError &&
+                        <h2 id="error">Erro ao Carregar o Mapa</h2>
+                    }
                 </section>
             </div>
+
+
         );
     }
 }

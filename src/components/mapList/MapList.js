@@ -6,7 +6,7 @@ import './MapList.css';
  * @author Washington
  */
 export default props => (
-    <ul>
-        {props.items.map((item, i) => <li className={item.show ? 'active' : ''} key={i} onClick={() => props.onMarkerClick(item.id)}>{item.title}</li>)}
-    </ul>
+    <div id="list">
+        {props.items.map((item, i) => <button className={item.show ? 'active' : ''} key={i} onClick={() => props.onMarkerClick(item.id)}>{item.title}</button>)}
+    </div>
 )
